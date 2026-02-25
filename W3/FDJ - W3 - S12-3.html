@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tantraz Registration Form</title>
+
+    <style>
+        /* ===== GLOBAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #0f172a, #1e3a8a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .form-container {
+            background: white;
+            width: 500px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1e3a8a;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input,
+        select,
+        textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        input:focus,
+        select:focus,
+        textarea:focus {
+            border-color: #2563eb;
+            outline: none;
+        }
+
+        textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .radio-group,
+        .checkbox-group {
+            margin-top: 8px;
+        }
+
+        .radio-group label,
+        .checkbox-group label {
+            font-weight: normal;
+            display: inline-block;
+            margin-right: 15px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 20px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        small {
+            color: gray;
+            font-size: 12px;
+        }
+
+        @media(max-width:600px) {
+            .form-container {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="form-container">
+
+        <h2>Tantraz Registration</h2>
+
+        <form action="#" method="post">
+
+            <!-- Full Name (Mandatory) -->
+            <label for="fullname">Full Name *</label>
+            <input type="text" id="fullname" name="fullname" placeholder="Enter your full name (e.g., Bharath Kumar)"
+                required>
+
+            <!-- Email (Mandatory with auto validation) -->
+            <label for="email">Email Address *</label>
+            <input type="email" id="email" name="email" placeholder="Enter a valid email (e.g., name@gmail.com)"
+                required>
+
+            <!-- Participation Category (Mandatory) -->
+            <label for="category">Participation Category *</label>
+            <select id="category" name="category" required>
+                <option value="">-- Select Category --</option>
+                <option value="individual">Individual</option>
+                <option value="team">Team</option>
+                <option value="audience">Audience</option>
+            </select>
+
+            <!-- T-Shirt Size -->
+            <label>T-Shirt Size</label>
+            <div class="radio-group">
+                <label><input type="radio" name="tshirt" value="S"> S</label>
+                <label><input type="radio" name="tshirt" value="M"> M</label>
+                <label><input type="radio" name="tshirt" value="L"> L</label>
+                <label><input type="radio" name="tshirt" value="XL"> XL</label>
+            </div>
+
+            <!-- Technical Interests -->
+            <label>Technical Interests</label>
+            <div class="checkbox-group">
+                <label><input type="checkbox" name="interests" value="AI"> AI</label>
+                <label><input type="checkbox" name="interests" value="Web Development"> Web Dev</label>
+                <label><input type="checkbox" name="interests" value="Cloud Computing"> Cloud Computing</label>
+            </div>
+
+            <!-- Biography with Max Length -->
+            <label for="bio">Expectations / Suggestions</label>
+            <textarea id="bio" name="bio" maxlength="200"
+                placeholder="Write your expectations or suggestions (max 200 characters)..."></textarea>
+
+            <small>Maximum 200 characters allowed.</small>
+
+            <!-- Submit -->
+            <button type="submit">Register</button>
+
+        </form>
+
+    </div>
+
+</body>
+
+</html>

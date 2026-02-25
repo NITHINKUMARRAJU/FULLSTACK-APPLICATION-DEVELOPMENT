@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiple Layout Configurations</title>
+
+    <style>
+        /* ===== RESET ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        /* ===== GENERAL STYLES ===== */
+        body {
+            background-color: #f4f6f9;
+        }
+
+        header {
+            background-color: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            background-color: #2563eb;
+            padding: 10px;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        section {
+            padding: 40px 20px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            color: #1e3a8a;
+        }
+
+        /* ===== GRID LAYOUT ===== */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .grid-item {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* ===== FIXED SIDEBAR LAYOUT ===== */
+        .layout-wrapper {
+            display: flex;
+        }
+
+        aside {
+            width: 250px;
+            background: #111827;
+            color: white;
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        aside ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        aside ul li {
+            margin-bottom: 15px;
+        }
+
+        aside ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        main {
+            flex: 1;
+            padding: 40px;
+            background: #ffffff;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: #1e3a8a;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+        /* ===== RESPONSIVE DESIGN ===== */
+        @media (max-width: 768px) {
+            .grid-container {
+                grid-template-columns: 1fr;
+            }
+
+            .layout-wrapper {
+                flex-direction: column;
+            }
+
+            aside {
+                width: 100%;
+                min-height: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Web Interface Layout Designs</h1>
+    </header>
+
+    <nav>
+        <a href="#">Home</a>
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="#">Contact</a>
+    </nav>
+
+    <!-- ================= GRID LAYOUT ================= -->
+    <section>
+        <h2>1. Grid-Based Layout</h2>
+
+        <div class="grid-container">
+            <article class="grid-item">
+                <h3>Card 1</h3>
+                <p>This layout uses CSS Grid.</p>
+            </article>
+
+            <article class="grid-item">
+                <h3>Card 2</h3>
+                <p>It is responsive and clean.</p>
+            </article>
+
+            <article class="grid-item">
+                <h3>Card 3</h3>
+                <p>Semantic tags are used.</p>
+            </article>
+
+            <article class="grid-item">
+                <h3>Card 4</h3>
+                <p>Flexible design approach.</p>
+            </article>
+
+            <article class="grid-item">
+                <h3>Card 5</h3>
+                <p>Modern UI structure.</p>
+            </article>
+
+            <article class="grid-item">
+                <h3>Card 6</h3>
+                <p>Mobile friendly layout.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- ================= FIXED SIDEBAR LAYOUT ================= -->
+    <section>
+        <h2>2. Sidebar Layout</h2>
+    </section>
+
+    <div class="layout-wrapper">
+
+        <aside>
+            <h3>Sidebar Menu</h3>
+            <ul>
+                <li><a href="#">Dashboard</a></li>
+                <li><a href="#">Profile</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Logout</a></li>
+            </ul>
+        </aside>
+
+        <main>
+            <h2>Main Content Area</h2>
+            <p>
+                This layout demonstrates a fixed-style sidebar using semantic tags.
+            </p>
+
+            <p><strong>Semantic Tags Used:</strong></p>
+            <ul>
+                <li>header</li>
+                <li>nav</li>
+                <li>section</li>
+                <li>article</li>
+                <li>aside</li>
+                <li>main</li>
+                <li>footer</li>
+            </ul>
+        </main>
+
+    </div>
+
+    <footer>
+        <p>© 2026 Web Design Lab</p>
+    </footer>
+
+</body>
+
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Authentication Interface</title>
+
+    <style>
+        /* ===== GLOBAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(to right, #2563eb, #1e3a8a);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        /* ===== CONTAINER ===== */
+        .auth-container {
+            background: white;
+            width: 400px;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .auth-container h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: #1e3a8a;
+        }
+
+        form {
+            display: none;
+        }
+
+        form.active {
+            display: block;
+        }
+
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 15px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        .toggle-link {
+            text-align: center;
+            margin-top: 10px;
+            cursor: pointer;
+            color: #2563eb;
+        }
+
+        .error {
+            color: red;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="auth-container">
+
+        <h2 id="formTitle">Sign In</h2>
+
+        <!-- SIGN IN FORM -->
+        <form id="signInForm" class="active" aria-labelledby="formTitle">
+
+            <label for="signin-email">Email</label>
+            <input type="email" id="signin-email" name="email" aria-label="Enter your email address" required>
+
+            <label for="signin-password">Password</label>
+            <input type="password" id="signin-password" name="password" aria-label="Enter your password" required>
+
+            <button type="submit">Sign In</button>
+        </form>
+
+        <!-- SIGN UP FORM -->
+        <form id="signUpForm" aria-labelledby="formTitle">
+
+            <label for="signup-name">Full Name</label>
+            <input type="text" id="signup-name" name="name" aria-label="Enter your full name" required>
+
+            <label for="signup-email">Email</label>
+            <input type="email" id="signup-email" name="email" aria-label="Enter your email address" required>
+
+            <label for="signup-password">Password</label>
+            <input type="password" id="signup-password" name="password" aria-label="Create a password" required>
+
+            <label for="signup-confirm">Confirm Password</label>
+            <input type="password" id="signup-confirm" name="confirmPassword" aria-label="Confirm your password"
+                required>
+
+            <button type="submit">Sign Up</button>
+        </form>
+
+        <div class="toggle-link" onclick="toggleForms()">
+            Don't have an account? Sign Up
+        </div>
+
+    </div>
+
+    <script>
+
+        /* ===== TOGGLE BETWEEN FORMS ===== */
+        function toggleForms() {
+            const signIn = document.getElementById("signInForm");
+            const signUp = document.getElementById("signUpForm");
+            const title = document.getElementById("formTitle");
+            const toggleText = document.querySelector(".toggle-link");
+
+            if (signIn.classList.contains("active")) {
+                signIn.classList.remove("active");
+                signUp.classList.add("active");
+                title.textContent = "Sign Up";
+                toggleText.textContent = "Already have an account? Sign In";
+            } else {
+                signUp.classList.remove("active");
+                signIn.classList.add("active");
+                title.textContent = "Sign In";
+                toggleText.textContent = "Don't have an account? Sign Up";
+            }
+        }
+
+        /* ===== BASIC PASSWORD MATCH VALIDATION ===== */
+        document.getElementById("signUpForm").addEventListener("submit", function (e) {
+            const password = document.getElementById("signup-password").value;
+            const confirm = document.getElementById("signup-confirm").value;
+
+            if (password !== confirm) {
+                alert("Passwords do not match!");
+                e.preventDefault();
+            }
+        });
+
+    </script>
+
+</body>
+
+</html>

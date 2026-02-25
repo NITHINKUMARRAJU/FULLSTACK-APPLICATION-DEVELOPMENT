@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Platform</title>
+
+    <style>
+        /* ===== GLOBAL ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+        }
+
+        /* ===== HEADER ===== */
+        header {
+            background: #111827;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            display: flex;
+            padding: 20px;
+        }
+
+        /* ===== FILTER SIDEBAR ===== */
+        .filters {
+            width: 250px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-right: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .filters h3 {
+            margin-bottom: 10px;
+            color: #111827;
+        }
+
+        .filters label {
+            display: block;
+            margin: 5px 0;
+        }
+
+        /* ===== PRODUCT GRID ===== */
+        .products {
+            flex: 1;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 20px;
+        }
+
+        .product-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-card h4 {
+            margin-bottom: 5px;
+        }
+
+        .product-card p {
+            font-size: 14px;
+            margin: 3px 0;
+        }
+
+        .price {
+            font-weight: bold;
+            color: #1e40af;
+        }
+
+        /* ===== BUTTON ===== */
+        button {
+            padding: 8px 12px;
+            background: #2563eb;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background: #1e40af;
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media(max-width:768px) {
+            .container {
+                flex-direction: column;
+            }
+
+            .filters {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>E-Commerce Platform</h1>
+    </header>
+
+    <div class="container">
+
+        <!-- FILTER SECTION -->
+        <div class="filters">
+            <h3>Filter Products</h3>
+
+            <h4>Price Range</h4>
+            <label>Min: <input type="number" id="minPrice" placeholder="0"></label>
+            <label>Max: <input type="number" id="maxPrice" placeholder="10000"></label>
+
+            <h4>Brand</h4>
+            <label><input type="checkbox" value="Nike" class="brand"> Nike</label>
+            <label><input type="checkbox" value="Adidas" class="brand"> Adidas</label>
+            <label><input type="checkbox" value="Puma" class="brand"> Puma</label>
+
+            <h4>Color</h4>
+            <label><input type="checkbox" value="Red" class="color"> Red</label>
+            <label><input type="checkbox" value="Blue" class="color"> Blue</label>
+            <label><input type="checkbox" value="Black" class="color"> Black</label>
+
+            <h4>Rating</h4>
+            <label><input type="radio" name="rating" value="4"> 4★ & above</label>
+            <label><input type="radio" name="rating" value="3"> 3★ & above</label>
+
+            <button onclick="applyFilters()">Apply Filters</button>
+        </div>
+
+        <!-- PRODUCT SECTION -->
+        <div class="products" id="productList"></div>
+
+    </div>
+
+    <script>
+
+        /* ===== PRODUCT DATA ===== */
+        const products = [
+            { name: "Nike Air Max", price: 5000, brand: "Nike", color: "Red", rating: 4 },
+            { name: "Adidas Runner", price: 4500, brand: "Adidas", color: "Blue", rating: 3 },
+            { name: "Puma Sport", price: 3000, brand: "Puma", color: "Black", rating: 4 },
+            { name: "Nike Revolution", price: 3500, brand: "Nike", color: "Black", rating: 5 },
+            { name: "Adidas UltraBoost", price: 8000, brand: "Adidas", color: "Red", rating: 5 }
+        ];
+
+        /* ===== DISPLAY PRODUCTS ===== */
+        function displayProducts(filteredProducts) {
+            const productList = document.getElementById("productList");
+            productList.innerHTML = "";
+
+            filteredProducts.forEach(product => {
+                productList.innerHTML += `
+            <div class="product-card">
+                <h4>${product.name}</h4>
+                <p class="price">₹${product.price}</p>
+                <p>Brand: ${product.brand}</p>
+                <p>Color: ${product.color}</p>
+                <p>Rating: ${product.rating}★</p>
+            </div>
+        `;
+            });
+        }
+
+        /* ===== APPLY FILTERS ===== */
+        function applyFilters() {
+
+            let minPrice = parseInt(document.getElementById("minPrice").value) || 0;
+            let maxPrice = parseInt(document.getElementById("maxPrice").value) || Infinity;
+
+            let selectedBrands = Array.from(document.querySelectorAll(".brand:checked"))
+                .map(cb => cb.value);
+
+            let selectedColors = Array.from(document.querySelectorAll(".color:checked"))
+                .map(cb => cb.value);
+
+            let selectedRating = document.querySelector("input[name='rating']:checked");
+            selectedRating = selectedRating ? parseInt(selectedRating.value) : 0;
+
+            let filtered = products.filter(product => {
+
+                return (
+                    product.price >= minPrice &&
+                    product.price <= maxPrice &&
+                    (selectedBrands.length === 0 || selectedBrands.includes(product.brand)) &&
+                    (selectedColors.length === 0 || selectedColors.includes(product.color)) &&
+                    product.rating >= selectedRating
+                );
+            });
+
+            displayProducts(filtered);
+        }
+
+        /* Initial Display */
+        displayProducts(products);
+
+    </script>
+
+</body>
+
+</html>
